@@ -1,0 +1,93 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-image: url(../images/bodyBg.gif);
+}
+
+#nav {
+	margin: 1px auto;
+	padding: 4px;
+	width: 900px;
+	height: 54px;
+	position: relative;
+}
+
+#nav>span#tt {
+	position: absolute;
+	top: 10px;
+	left: 300px;
+	display: inline-block;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	text-align: center;
+}
+
+div#main,div#newslist,div#comment {
+	width: 900px;
+	margin: 1px auto;
+	padding: 0px;
+	margin-top: 10px;
+}
+
+#main>div {
+	padding-left: 8px;
+	padding-right: 8px;
+	float: left;
+	margin-bottom: 2px;
+	line-height: 30px;
+	height: 30px;
+	text-align: center;
+	border: 1px dashed #3BB6FF;
+}
+/* 未选中的超链接样式 */
+#main>div a {
+	color: #000000;
+	text-decoration: none;
+}
+
+.focus {
+	background-color: #B7EAB7;
+}
+
+div.paging {
+	width: 900px;
+	margin: 1px auto;
+	padding: 0px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+div.paging div {
+	display: inline-block;
+	margin-right: 15px;
+}
+
+div.context {
+	display: block;
+	width: 890px;
+	height: 200px;
+	border: 1px solid green;
+	/*overflow:内容溢出了，怎么处理，用scroll生成滚动条 */
+	overflow: scroll;
+}
+
+.nr {
+	padding: 4px;
+	font-size: 14px;
+	color: #2369b1;
+	width: 892px;
+	margin: 8px auto;
+	border:1px solid #0F91CB;
+	font-size:13px;
+}
+.nr a {
+	color: #000000;
+	text-decoration: none;
+}
+.nr a:hover {
+	color:#19A15F;
+}

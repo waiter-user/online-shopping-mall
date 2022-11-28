@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet"
+          href="css/pintuer.css">
+    <link rel="stylesheet"
+          href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 修改会员密码</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="admin" id="myForm">
+            <input type="hidden" name="action" value="updatePwd">
+<!--            存储当前用户的id-->
+            <input type="hidden" name="userid" tH:value="${session.admin.userid}">
+            <div class="form-group">
+                <div class="">
+                    <label th:text="'管理员帐号：'+${session.admin.username}"></label>
+                </div>
+                <div class="field">
+                    <label style="line-height:33px;">
+
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>原始密码：</label>
+                </div>
+                <div class="field">
+                    <input type="password" class="input w50" id="pass" name="upsw" size="50" placeholder="请输入原始密码" data-validate="required:请输入原始密码" onblur="checkOldPwd()"/>
+                    <span id="msg" style="color: red"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>新密码：</label>
+                </div>
+                <div class="field">
+                    <input type="password" class="input w50" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>确认新密码：</label>
+                </div>
+                <div class="field">
+                    <input type="password" class="input w50" name="rnewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <!-- 可以在这里给出修改成功或失败的提示 -->
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    //检验输入的原始密码是否正确
+    function checkOldPwd(){
+        //获取session中的用户密码
+        let rightPwd='[[${session.admin.userpwd}]]';
+        if($("#pass").val()!=rightPwd){
+            //输入的原始密码错误
+            $("#msg").html("原始密码错误！");
+            return false;
+        }
+        //输入的原始密码正确
+        $("#msg").html("");
+        return true;
+    }
+    //给表单绑定一个submit事件,是单击提交按钮时自动触发的
+    $("#myForm").submit(function(){
+        let r=checkOldPwd();
+        // if(!r){
+        //     //阻止表单提交
+        //     return false;
+        // }
+        // //允许表单提交
+        // return true;
+        return r;
+    })
+</script>
+</body>
+</html>

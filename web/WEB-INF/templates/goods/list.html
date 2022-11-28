@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet"
+          href="css/pintuer.css">
+    <link rel="stylesheet"
+          href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head">
+        <strong class="icon-reorder">商品列表</strong>
+    </div>
+    <div class="padding border-bottom">
+        <ul class="search" style="padding-left:10px;">
+            <li><a class="button border-main icon-plus-square-o"
+                   th:href="@{/goods(action=toAdd)}"> 添加商品</a></li>
+            <li>请输入商品名称关键字：<input type="text" name="keyword"
+                                  id="keyword" class="input"
+                                  style="width:200px; line-height:17px;display:inline-block" /> <a
+                    href="javascript:void(0)" class="button border-main icon-search"
+                    onclick="changesearch()"> 搜索</a></li>
+        </ul>
+    </div>
+    <table class="table table-hover text-center">
+        <tr>
+            <th width="10%">编号</th>
+            <th>商品名称</th>
+            <th>图片</th>
+            <th>商品描述</th>
+            <th>类别</th>
+            <th>市场价</th>
+            <th>商城价</th>
+            <th>库存量</th>
+            <th>上市时间</th>
+            <th width="310">操作</th>
+        </tr>
+        <tr th:each="gd:${pb.data}">
+            <td th:text="${gd.goods_id}"></td>
+            <td th:text="${gd.goods_name}"><font color="#00CC99"></font></td>
+            <td th:text="${gd.goods_pic}"><img src="upload/1457614498958.jpg" width="60" height="60" border="0"></td>
+            <td th:utext="${gd.goods_miaoshu}"></td>
+            <td th:text="${gd.catelog.catelog_name}"></td>
+            <td th:text="${gd.market_price}"></td>
+            <td th:text="${gd.mall_price}"></td>
+            <td th:text="${gd.stock_num}"></td>
+            <td th:text="${gd.enter_date}"></td>
+            <td><div class="button-group">
+                <a class="button border-main" th:href="@{/goods(action=toUpdate,id=${gd.goods_id})}"><span
+                        class="icon-edit"></span> 修改</a>
+                <a class="button border-green" th:href="@{/goods(action=downloadPic)}"><span
+                        class="icon-align-center"></span> 下载</a>
+            </div></td>
+        </tr>
+        <tr>
+            <td colspan="80"><div class="pagelist">
+                <!-- 当前页是第1页时，首页，上一页直接显示，  
+         <a class="nocls">首页</a>   <a class="nocls">上一页</a>
+           不是第1页时，点击后跳转页面,onclick指定函数 -->
+                <a href="javascript:void(0)" onclick="alert('首页');">首页</a> <a
+                    href="javascript:void(0)" onclick="alert('上一页');">上一页</a>
+                <!-- 当前页显示在span里面,其它页点击后跳转页面 -->
+                <a href="javascript:void(0)" onclick="alert(1);">1</a> <span
+                    class="current">2</span>
+                <!-- 当前页是尾页时，尾页，下一页直接显示，  
+         <a class="nocls">下一页</a>   <a class="nocls">尾页</a>
+           不是尾页时，点击后跳转页面,onclick指定函数 -->
+                <a class="nocls">下一页</a> <a class="nocls">尾页</a>
+            </div></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

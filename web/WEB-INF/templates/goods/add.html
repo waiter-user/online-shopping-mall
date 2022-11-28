@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet"
+          href="css/pintuer.css">
+    <link rel="stylesheet"
+          href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+    <!-- 引入日期选择器的js文件 -->
+    <script
+            src="My97DatePicker/WdatePicker.js"></script>
+    <!-- 引入富文本编辑器UMEditor的资源文件 -->
+    <link href="umeditor/themes/default/css/umeditor.css" type="text/css"
+          rel="stylesheet">
+    <script type="text/javascript"
+            src="umeditor/third-party/template.min.js"></script>
+    <script type="text/javascript"  src="umeditor/umeditor.config.js"></script>
+    <script type="text/javascript"  src="umeditor/umeditor.min.js"></script>
+    <script type="text/javascript"  src="umeditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+<div class="panel admin-panel margin-top">
+    <div class="panel-head" id="add">
+        <strong><span class="icon-pencil-square-o"></span>添加商品</strong>
+    </div>
+    <div class="body-content">
+        <form method="post" class="form-x" enctype="multipart/form-data" action="goods">
+            <input type="hidden" name="action" value="add">
+            <div class="form-group">
+                <div class="label">
+                    <label>商品名称：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w80" name="goods_name"
+                           data-validate="required:请填写商品名称" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>商品描述：</label>
+                </div>
+                <div class="field">
+                    <!-- <input type="text" class="input w80" name="goods_miaoshu"
+                        data-validate="required:请填写商品名称" /> -->
+                    <!-- 将普通文本框换成富文本编辑器 -->
+                    <script type="text/plain"  id="content" name="goods_miaoshu" style="width:500px;height:200px">
+
+                    </script>
+                    <script type="text/javascript">
+                        //实例化富文本编辑器，显示在页面，参数是上面的id
+                        var  um=UM.getEditor('content');
+
+                    </script>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>商品图片：</label>
+                </div>
+                <div class="field">
+                    <input type="file" class="input w80" name="goods_pic" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>市场价：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w80" name="market_price"
+                           data-validate="required:请填写市场价" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>商城价：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w80" name="mall_price"
+                           data-validate="required:请填写商城价" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>商品类别：</label>
+                </div>
+                <div class="field">
+                    <select name="catelog_id">
+                        <option value="1">健身</option>
+                        <option value="2">球类</option>
+                        <option value="3">益智</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>库存数量：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w80" name="stock_num"
+                           data-validate="required:请填写库存数量" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>生产地址：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w80" name="goods_address"
+                           data-validate="required:请填写生产地址" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>上市日期：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w80" name="enter_date"
+                           onclick="WdatePicker({readOnly:true})"
+                           data-validate="required:请填写生产地址" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit">
+                        提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

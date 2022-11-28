@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet"
+          href="css/pintuer.css">
+    <link rel="stylesheet"
+          href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head">
+        <strong class="icon-reorder">订单列表</strong> <a href=""
+                                                      style="float:right; display:none;">添加字段</a>
+    </div>
+
+    <table class="table table-hover text-center" width="100%" >
+        <tr>
+            <th width="15%">编号</th>
+            <th  width="10%">订单金额</th>
+            <th  width="10%">下单日期</th>
+            <th  width="20%">收货地址</th>
+            <th  width="10%">订单状态</th>
+            <th>操作</th>
+        </tr>
+
+        <tr th:each="order:${pb.data}">
+            <td th:text="${order.order_id}"></td>
+            <td th:text="${order.order_jine}"></td>
+            <td th:text="${order.order_time}"></td>
+            <td th:text="${order.order_address}"></td>
+            <td th:if="${order.order_zhuangtai}==0">待发货</td>
+            <td th:if="${order.order_zhuangtai}==1">已发货</td>
+            <td th:if="${order.order_zhuangtai}==2">已收货</td>
+            <td th:if="${order.order_zhuangtai}==3">已完成</td>
+            <td>
+                <a class="button border-main"
+                   th:if="${order.order_zhuangtai}==0"
+                   th:onclick="changezt([[${order.order_id}]])"
+
+                >
+                    <span class="icon-edit"></span>发货
+                </a>
+                <a class="button border-main"
+                   th:if="${order.order_zhuangtai}==1"
+                   th:onclick="changezt([[${order.order_id}]])"
+                >
+                    <span class="icon-edit"></span>收货
+                </a>
+                <a class="button border-main"
+                   th:if="${order.order_zhuangtai}==2"
+                   th:onclick="|changezt(${order.order_id})|"
+                >
+                    <span class="icon-edit"></span>完成
+                </a>
+                <a class="button border-red"
+                   th:href="'orderItem?action=list&id='+${order.order_id}"><span class="icon-trash-o"></span>订单明细</a>
+                <!-- 已完成的订单才显示删除超链接 -->
+                <a class="button border-red"
+                   th:if="${order.order_zhuangtai}==3"
+                   th:onclick="|deleteorder('${order.order_id}')|"
+                   href="javascript:void(0)"><span class="icon-trash-o"></span>删除</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="80"><div class="pagelist">
+                <a href="javascript:void(0)" onclick="goPage(1)">首页</a>
+                <span th:each="i:${#numbers.sequence(1,pb.totalPage)}">
+                    <a href="javascript:void(0)" th:onclick="|goPage(${i})|" th:text="${i}" th:unless="${i==pb.pageNo}"></a>
+                    <span class="current"  th:text="${i}" th:if="${i==pb.pageNo}"></span>
+                </span>
+                <a class="nocls" href="javascript:void(0)" th:onclick="|goPage(${pb.totalPage})|">尾页</a>
+            </div></td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    function changezt(i){
+        location.href="order?action=updateZT&id="+i;
+    }
+    function deleteorder(i){
+        location.href="order?action=deleteOrder&id="+i;
+    }
+    function goPage(i){
+        location.href="order?action=list&pageNo="+i;
+    }
+</script>
+</html>

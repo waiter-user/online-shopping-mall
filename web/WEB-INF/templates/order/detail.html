@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <title>订单明细</title>
+
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel margin-top">
+    <div class="panel-head" id="add">
+        <strong><span class="icon-pencil-square-o"></span>订单明细</strong>
+    </div>
+    <div class="body-content"  styie="text-align:center">
+        <div th:each="i:${list}" style="width: 300px;float: left" >
+            <div class="form-group">
+                <div class="label">
+                    <label th:text="'明细编号：'+${i.orderitem_id}"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label th:text="'商品名：'+${i.goods.goods_name}"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label th:text="'商品价格：'+${i.goods.mall_price}"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label th:text="'购买数量：'+${i.goods_num}"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label th:text="'金额：'+${i.goods_num*i.goods.mall_price}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="field">
+                <button class="button bg-main icon-check-square-o"
+                        onclick="back()">返回</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    function back(){
+        //document.referrer为上次访问页面的地址
+        location.href=document.referrer;
+    }
+</script>
+</body>
+</html>

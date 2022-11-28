@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet"
+          href="css/pintuer.css">
+    <link rel="stylesheet"
+          href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head">
+        <strong class="icon-reorder">前台用户列表</strong>
+    </div>
+    <table class="table table-hover text-center">
+        <tr>
+            <th width="10%">用户编号</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>姓名</th>
+            <th>地址</th>
+            <th>性别</th>
+            <th>联系电话</th>
+            <th>邮箱</th>
+            <th>QQ</th>
+        </tr>
+        <tr th:each="pb:${pb.data}">
+            <td th:text="${pb.user_id}"></td>
+            <td th:text="${pb.user_name}"></td>
+            <td th:text="${pb.user_pwd}"></td>
+            <td th:text="${pb.user_realname}"></td>
+            <td th:text="${pb.user_address}"></td>
+            <td th:text="${pb.user_sex}"></td>
+            <td th:text="${pb.user_tel}"></td>
+            <td th:text="${pb.user_email}"></td>
+            <td th:text="${pb.user_qq}"></td>
+        </tr>
+        <tr>
+            <td colspan="80">
+                <div class="pagelist">
+                    <!-- 当前页是第1页时，首页，上一页直接显示，
+             <a class="nocls">首页</a>   <a class="nocls">上一页</a>
+               不是第1页时，点击后跳转页面,onclick指定函数 -->
+                    <a href="javascript:void(0)" onclick="goPage(1)">首页</a>
+                    <span th:each="i:${#numbers.sequence(1,pb.totalPage)}">
+                    <a href="javascript:void(0)" th:text="${i}" th:unless="${i==pb.pageNo}" th:onclick="|goPage(${i})|"></a>
+                        <!-- 当前页显示在span里面,其它页点击后跳转页面 -->
+                    <span class="current" th:if="${i==pb.pageNo}" th:text="${i}"></span>
+                    </span>
+
+                    <!-- 当前页是尾页时，尾页，下一页直接显示，
+             <a class="nocls">下一页</a>   <a class="nocls">尾页</a>
+               不是尾页时，点击后跳转页面,onclick指定函数 -->
+                    <a class="nocls" th:onclick="|goPage(${pb.totalPage})|">尾页</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    function goPage(pageNo) {
+        location.href = "user?pageNo=" + pageNo;
+    }
+</script>
+</body>
+</html>
