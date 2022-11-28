@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息</title>
+</head>
+<script language="javascript">
+    function closeOpen()
+    {
+        window.returnValue=false;
+        window.close();
+    }
+    function check1()
+    {
+        if(document.form1.userName.value=="")
+        {
+            alert("请输入用户名");
+            return false;
+        }
+        if(document.form1.userPw.value=="")
+        {
+            alert("请输入密码");
+            return false;
+        }
+        if(document.form1.userPw.value!=document.form1.userPw1.value)
+        {
+            alert("两次密码不一致");
+            return false;
+        }
+        if(document.form1.userRealname.value=="")
+        {
+            alert("请输入真实姓名");
+            return false;
+        }
+        if(document.form1.userTel.value=="")
+        {
+            alert("请输入电话");
+            return false;
+        }
+        if(document.form1.userAddress.value=="")
+        {
+            alert("请输入收货地址");
+            return false;
+        }
+        if(document.form1.userEmail.value=="")
+        {
+            alert("请输入Email");
+            return false;
+        }
+        document.form1.submit();
+    }
+</script>
+<body>
+<form th:action="@{/user}" name="form1" method="post">
+    <input type="hidden" name="action" value="updateUser">
+    <table width="98%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+        <caption>编辑个人信息</caption>
+        <tr>
+            <td width="20%" height="30" align="right" bgcolor="#F9F9F9" style="font-size: 11px;">
+                用户名：
+            </td>
+            <td width="80%" bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="text" name="userName" id="userName" readonly="readonly" th:value="${session.user.user_name}"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="30" align="right" bgcolor="#F9F9F9" style="font-size: 11px;">
+                密 码：
+            </td>
+            <td bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="password" name="userPw" th:value="${session.user.user_pwd}"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="30" align="right" bgcolor="#F9F9F9" style="font-size: 11px;">
+                真实姓名：
+            </td>
+            <td bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="text" name="userRealname" th:value="${session.user.user_realname}"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="30" align="right" bgcolor="#F9F9F9" style="font-size: 11px;">
+                收货住址：
+            </td>
+            <td bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="text" name="userAddress" th:value="${session.user.user_address}"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="30" align="right" bgcolor="#F9F9F9" style="font-size: 11px;">
+                性别：
+            </td>
+            <td bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="radio" name="userSex" value="男"  th:checked="${#strings.equals(session.user.user_sex,'男')}" }/>男
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="userSex" value="女"  th:checked="${#strings.equals(session.user.user_sex,'女')}" }/>女
+            </td>
+        </tr>
+        <tr>
+            <td height="30" align="right" bgcolor="#F9F9F9" style="font-size: 11px;">
+                电话：
+            </td>
+            <td bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="text" name="userTel" th:value="${session.user.user_tel}"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="30" align="right" bgcolor="#F9F9F9" style="font-size: 11px;">
+                E-mail：
+            </td>
+            <td bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="text" name="userEmail" th:value="${session.user.user_email}"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="30" align="right" bgcolor="#F9F9F9" style="font-size: 11px;">
+                QQ：
+            </td>
+            <td bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="text" name="userQq" th:value="${session.user.user_qq}"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="30" align="right" bgcolor="#F9F9F9">
+                &nbsp;
+            </td>
+            <td bgcolor="#FFFFFF">
+                &nbsp;
+                <input type="hidden" name="userId" th:value="${session.user.user_id}" />
+                <input type="submit" value="保存"/>
+                <input type="button" value="取消" onclick="closeOpen()"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
